@@ -1,0 +1,19 @@
+<h2>4.1 Routing</h2>
+<p>Lag en ny html side pages/register.html. Legg til routing i app.js slik at siden vises når man går på /register.
+Lag også en registerController som brukes på register siden.</p>
+ <button class="btn btn-default" ng-click="show1 = !show1">Løsningsforslag</button>
+    <div ng-show="show1">
+        <pre>
+app.config(function($routeProvider) {
+
+    $routeProvider.when('/', {
+        templateUrl: "pages/register.html",
+        controller: "registerController"
+    });
+};
+        </pre>
+
+        <pre>
+&lt;script src=&quot;lib/angular-route/angular-route.min.js&quot;&gt;&lt;/script&gt;
+        </pre>
+    </div>

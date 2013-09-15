@@ -1,0 +1,85 @@
+<h2>Controllers</h2>
+
+<div class="well">
+    <p>Det skal gjøres diverse kall mot et api beskrevet <a href="https://github.com/haakondr/Angular-kurs/tree/master/server">her</a>. Apiet er et enkelt twitter-api med veldig simpel innlogging. Hver gang man tweeter så sender man med et user objekt med brukernavn og passord.</p>
+</div>
+
+<h2>2.1 http get / Hent tweets</h2>
+<div class="well">
+    <p>Inject $http i controller, og gjør et http get kall for å hente ut en liste med tweets fra /tweets</p>
+    <p>Lagre listen med tweets på $scope, og vis listen i viewet.</p>
+
+    <button class="btn btn-default" ng-click="show1 = !show1">Løsningsforslag</button>
+    <div ng-show="show1">
+        <pre>
+function controllersController($scope, $http,  $location) {
+var api = 'http://absint.online.ntnu.no:8989/api/v1';
+    $http.get("http://absint.online.ntnu.no:8989/api/v1/tweets").success(function(response) {
+            $scope.tweets = response.tweets;
+        }).error(function(error) {
+            $scope.error = error.data.message;
+        });
+    };
+        </pre>
+
+// brackets rundt tweet.text skal være uten whitespace:
+        <pre>
+&lt;ul ng-repeat=&quot;tweet in tweets&quot;&gt;
+    &lt;li&gt;&#123; &#123; tweet.text &#125; &#125;&lt;/li&gt;
+&lt;/ul&gt;
+        </pre>
+        <h3>Demo:</h3>
+        <ul ng-repeat="tweet in tweets">
+            <li>{{tweet.text}}</li>
+        </ul>
+
+    </div>
+</div>
+
+<h2>2.2 Http post / Registrer bruker</h2>
+
+<div class="well">
+    <p>Lag et input form som gjør et post request for å registere bruker. Hvis request er success, sett $scope.user = user</p>
+
+    <button class="btn btn-default" ng-click="show2 = !show2">Løsningsforslag</button>
+    <div ng-show="show2">
+        <pre>
+&lt;form ng-submit=&quot;register()&quot;&gt;
+    &lt;input type=&quot;text&quot; ng-model=&quot;username&quot; placeholder=&quot;Enter username&quot;&gt;
+    &lt;input type=&quot;text&quot; ng-model=&quot;fullname&quot; placeholder=&quot;Enter full name&quot;&gt;
+    &lt;input type=&quot;password&quot; ng-model=&quot;password&quot; placeholder=&quot;Enter password&quot;&gt;
+    &lt;button type=&quot;submit&quot; class=&quot;btn btn-default&quot;&gt;Register&lt;/button&gt;
+&lt;/form&gt;
+        </pre>
+
+        <pre>
+$scope.register = function() {
+    var user = {
+        username: $scope.username,
+        password: $scope.password,
+        full_name: $scope.fullname
+        };
+
+    $http.post("http://absint.online.ntnu.no:8989/api/v1/users", {
+        user: user
+    }).success(function(response) {
+        $scope.user = user;
+    }).error(function(response) {
+        console.log(response);
+    });
+};
+        </pre>
+    </div>
+</div>
+
+<h2>2.3 Login</h2>
+<div class="well">
+    <p>Lag et login form tilsvarende register form, som gjør et post request mot /login.
+    Hvis request er 200 OK, sett $scope.user til brukerobjektet </p>
+</div>
+
+<h2>2.4 Post tweet</h2>
+<div class="well">
+    <p>Gjør et post request mot /tweets. Request body må være på følgende format:</p>
+    <p>{user: $scope.user, text: "text"}</p>
+</div>

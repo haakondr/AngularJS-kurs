@@ -1,0 +1,68 @@
+<h2>1.1 Data binding</h2>
+
+<div class="well">
+    <p>
+        Lag et input felt som oppdaterer et tekst-felt
+    </p>
+
+    <button class="btn btn-default" ng-click="show1 = !show1">Løsningsforslag</button>
+    <div ng-show="show1">
+        <div class="span6">
+        </div>
+        <div class="span6">
+            <input ng-model="input">{{input}}
+        </div>
+    </div>
+</div>
+
+<h2>1.2 Dynamisk disable elementer</h2>
+<div class="well">
+
+    <p>Lag en knapp som er disabled hvis inputfeltet fra oppgave 1 er tomt</p>
+    <button class="btn btn-default" ng-click="show2 = !show2">Løsningsforslag</button>
+    <div ng-show="show2">
+        <input ng-model="username">
+        <button ng-disabled="!username" class="btn btn-primary">Log in</button>
+    </div>
+</div>
+
+<h2>1.3 iterasjon over lister</h2>
+<div class="well">
+    <p>Lag et JavaScript array med noen verdier og lagre det på $scope. Iterer over listen og vis frem verdiene.</p>
+    <button class="btn btn-default" ng-click="show3 = !show3">Løsningsforslag</button>
+    <div ng-show="show3">
+        <ul ng-repeat="item in items">
+            <div ng-style="{color: item.color}">
+                <li>{{item.color}}</li>
+            </div>
+        </ul>
+    </div>
+</div>
+
+<h2>1.4 Form submit</h2>
+<div class="well">
+    <p>Lag et innloggingsform med to input (brukernavn og passord) og knapp som submitter form. Når form submittes skal metoden $scope.login() kalles i controller.</p>
+    <button class="btn btn-default" ng-click="show4 = !show4">Løsningsforslag</button>
+    <div ng-show="show4">
+        <form name="inputform" ng-submit="login()">
+            <input type="text" placeholder="username" ng-model="user.username" />
+            <input type="password" placeholder="password" ng-model="user.password" />
+            <button type="submit" class="btn btn-primary">Login</button>
+        </form>
+    </div>
+</div>
+
+<h2>1.5 Form validation</h2>
+<div class="well">
+    <p>Sett brukernavn- og passord-feltene til required. Disable login-knappen hvis loginform er invalid.</p>
+
+    <button class="btn btn-default" ng-click="show5 = !show5">Løsningsforslag</button>
+
+    <div ng-show="show5">
+        <form novalidate name="loginform" ng-submit="login()">
+            <input type="text" placeholder="username" ng-model="user.username" required/>
+            <input type="password" placeholder="password" ng-model="user.password" required />
+            <button type="submit" class="btn btn-primary" ng-disabled="loginform.$invalid">Login</button>
+        </form>
+    </div>
+</div>

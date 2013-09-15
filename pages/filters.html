@@ -1,0 +1,17 @@
+<h2>3.1 Datofilter</h2>
+
+<div class="well">
+    <p>
+        Modifiser listen av tweets til å vise dato, og formatter dato på et mer leselig format.
+    </p>
+
+    <button class="btn btn-default" ng-click="show1 = !show1">Løsningsforslag</button>
+    <div ng-show="show1">
+        <pre>
+&lt;ul ng-repeat=&quot;tweet in tweets&quot;&gt;
+    &lt;li&gt;{ {tweet.timestamp | date:'medium'} } - { {tweet.text} }&lt;/li&gt;
+&lt;/ul&gt;
+        </pre>
+
+    </div>
+</div>
