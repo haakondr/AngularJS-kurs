@@ -8,7 +8,7 @@ app.config(function($routeProvider) {
         templateUrl: "pages/home.html",
         controller: "homeController"
     }).when('/data-bindings', {
-        templateUrl: "/pages/data_bindings.html",
+        templateUrl: "/pages/databindings.html",
         controller: 'dataBindingsController'
     }).when('/controllers', {
         templateUrl: "pages/controllers.html",
