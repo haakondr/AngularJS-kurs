@@ -134,7 +134,7 @@ Date: Sun, 15 Sep 2013 18:09:25 GMT
 ```
 
 ## ny tweet
-Gjøres ved å poste følgende jsondata til `/api/v1/users
+Gjøres ved å poste følgende jsondata til `/api/v1/tweets`
 ```javascript
 {
   "user": {
