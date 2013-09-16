@@ -1,5 +1,11 @@
 #Simple twitter api
 
+## Installing
+```
+$ mkvirtualenv angular-kurs # optional
+$ pip install -r requirements.txt  # legg til --user etter install om du ikke har root
+$ python api.py
+```
 
 ## Getting all tweets
 ```bash
@@ -9,24 +15,25 @@ $ curl -i http://absint.online.ntnu.no:8989/api/v1/tweets
 ```bash
 HTTP/1.0 200 OK
 Content-Type: application/json
-Content-Length: 279
+Content-Length: 271
 Access-Control-Allow-Origin: *
 Access-Control-Allow-Methods: HEAD, GET, POST, OPTIONS
 Access-Control-Max-Age: 21600
+Access-Control-Allow-Headers: Accept, Origin, Content-Type, X-Requested-With
 XSRF-TOKEN: hereBeRandomXSRFtoken
 Server: Werkzeug/0.9.4 Python/2.7.3
-Date: Sun, 15 Sep 2013 16:03:11 GMT
+Date: Mon, 16 Sep 2013 09:09:52 GMT
 
 {
   "tweets": [
     {
-      "password": "first!",
-      "timestamp": "2013-09-15 17:51:17.398705",
+      "text": "first!",
+      "timestamp": "2013-09-15T20:48:36.373712",
       "username": "james"
     },
     {
-      "password": "@james firsts are stupid..",
-      "timestamp": "2013-09-15 17:51:17.398740",
+      "text": "@james firsts are stupid..",
+      "timestamp": "2013-09-15T20:48:36.373768",
       "username": "douglas"
     }
   ]
@@ -41,19 +48,20 @@ $ curl -i http://absint.online.ntnu.no:8989/api/v1/tweets/james
 ```bash
 HTTP/1.0 200 OK
 Content-Type: application/json
-Content-Length: 138
+Content-Length: 134
 Access-Control-Allow-Origin: *
 Access-Control-Allow-Methods: HEAD, OPTIONS, GET
 Access-Control-Max-Age: 21600
+Access-Control-Allow-Headers: Accept, Origin, Content-Type, X-Requested-With
 XSRF-TOKEN: hereBeRandomXSRFtoken
 Server: Werkzeug/0.9.4 Python/2.7.3
-Date: Sun, 15 Sep 2013 16:53:46 GMT
+Date: Mon, 16 Sep 2013 09:10:37 GMT
 
 {
   "tweets": [
     {
-      "password": "first!",
-      "timestamp": "2013-09-15 17:51:17.398705",
+      "text": "first!",
+      "timestamp": "2013-09-15T20:48:36.373712",
       "username": "james"
     }
   ]
@@ -91,10 +99,21 @@ Date: Sun, 15 Sep 2013 16:04:10 GMT
 }
 ```
 
-## registring new user
+## registrering av nye brukere
+Gjøres ved å poste følgende jsondata til `/api/v1/users
+```javascript
+{
+  "user": {
+    "username": "george",
+    "password": "password",
+    "full_name": "George Bush"
+  }
+}
+```
+
 ```bash
-$ curl -X POST -i -H "Content-Type:application/json" \     [20:09:18]
--H "Accept:application/json" http://localhost:8989/api/v1/users \
+$ curl -X POST -i -H "Content-Type:application/json" \
+-H "Accept:application/json" http://absint.online.ntnu.no:8989/api/v1/users \
 -d '{"user": {"username": "george", "password": "password", "full_name":"George Bush"}}'
 ```
 
@@ -114,7 +133,18 @@ Date: Sun, 15 Sep 2013 18:09:25 GMT
 }
 ```
 
-## new tweet
+## ny tweet
+Gjøres ved å poste følgende jsondata til `/api/v1/users
+```javascript
+{
+  "user": {
+    "username": "james",
+    "password": "password"
+  },
+  "text": "dette er en tekst"
+}
+```
+
 ```bash
 $ curl -X POST -i -H "Content-Type:application/json" \
 -H "Accept:application/json" http://absint.online.ntnu.no:8989/api/v1/tweets \
@@ -124,28 +154,27 @@ $ curl -X POST -i -H "Content-Type:application/json" \
 ```bash
 HTTP/1.0 200 OK
 Content-Type: application/json
-Content-Length: 114
+Content-Length: 98
 Access-Control-Allow-Origin: *
 Access-Control-Allow-Methods: HEAD, GET, POST, OPTIONS
 Access-Control-Max-Age: 21600
+Access-Control-Allow-Headers: Accept, Origin, Content-Type, X-Requested-With
 XSRF-TOKEN: hereBeRandomXSRFtoken
-Server: Werkzeug/0.9.4 Python/2.7.5+
-Date: Sun, 15 Sep 2013 17:38:44 GMT
+Server: Werkzeug/0.9.4 Python/2.7.3
+Date: Mon, 16 Sep 2013 09:16:29 GMT
 
 {
-  "tweets": {
-    "text": "a tweet text", 
-    "timestamp": "2013-09-15T19:38:44.737859", 
-    "username": "james"
-  }
-}%
+  "text": "a tweet text",
+  "timestamp": "2013-09-16T11:16:29.293807",
+  "username": "james"
+}
 ```
 
 
 ## checking username and password
 ```bash
-$ curl -X POST -i -H "Content-Type:application/json" \    [20:11:32]
--H "Accept:application/json" http://localhost:8989/api/v1/login \
+$ curl -X POST -i -H "Content-Type:application/json" \
+-H "Accept:application/json" http://absint.online.ntnu.no:8989/api/v1/login \
 -d '{"user": {"username": "james", "password": "password"}}'
 ```
 
