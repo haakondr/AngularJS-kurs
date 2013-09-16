@@ -24,12 +24,12 @@ var api = 'http://absint.online.ntnu.no:8989/api/v1';
 
 // brackets rundt tweet.text skal være uten whitespace:
         <pre>
-&lt;ul ng-repeat=&quot;tweet in tweets&quot;&gt;
+&lt;ul ng-repeat=&quot;tweet in tweets | orderBy:'-timestamp' &quot;&gt;
     &lt;li&gt;&#123; &#123; tweet.text &#125; &#125;&lt;/li&gt;
 &lt;/ul&gt;
         </pre>
         <h3>Demo:</h3>
-        <ul ng-repeat="tweet in tweets">
+        <ul ng-repeat="tweet in tweets | orderBy:'-timestamp'">
             <li>{{tweet.text}}</li>
         </ul>
 
